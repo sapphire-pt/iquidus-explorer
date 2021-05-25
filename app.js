@@ -172,6 +172,12 @@ app.use('/ext/getdistribution', function(req,res){
   });
 });
 
+app.use('/ext/balances', function(req,res){
+  db.get_addresses_balances(function(addresses){ 
+    res.send(addresses);
+  });
+});
+
 app.use('/ext/getlasttxsajax/:min', function(req,res){
   if(typeof req.query.length === 'undefined' || isNaN(req.query.length) || req.query.length > settings.index.last_txs){
     req.query.length = settings.index.last_txs;
